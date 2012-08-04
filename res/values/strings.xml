@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">Yamba</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_status">StatusActivity</string>
+    <string name="titleStatus">Status Update</string>
+    <string name="hintText">Enter crazy status</string>
+    <string name="buttonUpdate">Update</string>
+
+</resources>
