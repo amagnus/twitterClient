@@ -7,5 +7,12 @@
     <string name="titleStatus">Status Update</string>
     <string name="hintText">Enter crazy status</string>
     <string name="buttonUpdate">Update</string>
+    <string name="titleUsername">Username</string>
+    <string name="summaryUsername">Username to connect to API</string>
+    <string name="titlePassword">Password</string>
+    <string name="summaryPassword">Password to connect to API</string>
+    <string name="titleApiRoot">API Root</string>
+    <string name="summaryApiRoot">URL of API</string>
+    <string name="titlePrefsActivity">Preferences</string>
 
 </resources>
