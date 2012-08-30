@@ -18,11 +18,21 @@ public final class R {
     public static final class id {
         public static final int buttonUpdate=0x7f080002;
         public static final int editText=0x7f080001;
-        public static final int menu_settings=0x7f080003;
+        public static final int itemPrefs=0x7f080009;
+        public static final int itemServiceStart=0x7f08000a;
+        public static final int itemServiceStop=0x7f08000b;
+        public static final int listTimeline=0x7f080006;
+        public static final int menu_settings=0x7f080008;
         public static final int textCount=0x7f080000;
+        public static final int textCreatedAt=0x7f080004;
+        public static final int textText=0x7f080005;
+        public static final int textTimeline=0x7f080007;
+        public static final int textUser=0x7f080003;
     }
     public static final class layout {
         public static final int activity_status=0x7f030000;
+        public static final int row=0x7f030001;
+        public static final int timeline_basic=0x7f030002;
     }
     public static final class menu {
         public static final int activity_status=0x7f070000;
@@ -39,8 +49,12 @@ public final class R {
         public static final int summaryUsername=0x7f050008;
         public static final int titleApiRoot=0x7f05000b;
         public static final int titlePassword=0x7f050009;
+        public static final int titlePrefs=0x7f05000e;
         public static final int titlePrefsActivity=0x7f05000d;
+        public static final int titleServiceStart=0x7f05000f;
+        public static final int titleServiceStop=0x7f050010;
         public static final int titleStatus=0x7f050004;
+        public static final int titleTimeline=0x7f050011;
         public static final int titleUsername=0x7f050007;
         public static final int title_activity_status=0x7f050003;
     }

@@ -2,11 +2,18 @@ package com.amagnus.yamba1;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +30,7 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
 	Button updateButton;
 	Twitter twitter;
 	TextView textCount;
+	SharedPreferences prefs;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,8 +47,8 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
         textCount.setTextColor(Color.GREEN);
         editText.addTextChangedListener(this);
         
-        twitter = new Twitter("amagnus", "blabla59");
-        twitter.setAPIRootUrl("http://yamba.marakana.com/api");
+//        twitter = new Twitter("amagnus", "blabla59");
+//        twitter.setAPIRootUrl("http://yamba.marakana.com/api");
     }
     
     // Called when button is clicked
@@ -50,6 +58,33 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
     	Log.d(TAG, "onClicked");
     }
     
+    // Called first time user clicks on the menu button 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, menu);
+    	return true;
+    }
+    
+    // Called when an options item is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    		case R.id.itemServiceStart:
+    		startService(new Intent(this, UpdaterService.class));
+    		break;
+    		
+    		case R.id.itemServiceStop:
+    		stopService(new Intent(this, UpdaterService.class));
+    		break;
+    		
+    		case R.id.itemPrefs:
+    		startActivity(new Intent(this, PrefsActivity.class));
+    		break;
+    	}
+    return true;
+    }
+    
     // Asynchronously posts to twitter
     class PostToTwitter extends AsyncTask<String, Integer, String> {
     
@@ -57,9 +92,12 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
     	@Override
     	protected String doInBackground(String... statuses) {
     		try {
-    			Twitter.Status status = twitter.updateStatus(statuses[0]); return status.text;
-    		} catch (TwitterException e) { Log.e(TAG, e.toString()); e.printStackTrace();
-    		return "Failed to post";
+    			YambaApplication yamba = ((YambaApplication) getApplication());
+    			Twitter.Status status = yamba.getTwitter().updateStatus(statuses[0]);
+    			return status.text;
+    		} catch (TwitterException e) {
+    			Log.e(TAG, "Failed to connect to Twitter service", e);
+    			return "Failed to post";
     		} 
     	}
     	

@@ -14,5 +14,9 @@
     <string name="titleApiRoot">API Root</string>
     <string name="summaryApiRoot">URL of API</string>
     <string name="titlePrefsActivity">Preferences</string>
+    <string name="titlePrefs">Preferences</string>
+    <string name="titleServiceStart">Start service</string>
+    <string name="titleServiceStop">Stop service</string>
+    <string name="titleTimeline">Timeline</string>
 
 </resources>
