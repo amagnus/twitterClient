@@ -15,14 +15,16 @@
         android:theme="@style/AppTheme"
         android:name=".YambaApplication" >
         
+        <activity android:name=".TimelineActivity" android:label="@string/titleTimeline">
+            <intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+        
         <activity
             android:name=".StatusActivity"
             android:label="@string/title_activity_status" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         
         <activity android:name=".PrefsActivity" android:label="@string/titlePrefsActivity"></activity>
