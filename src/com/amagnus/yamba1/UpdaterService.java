@@ -2,14 +2,11 @@ package com.amagnus.yamba1;
 
 import java.util.List;
 import android.app.Service;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.util.Log;
 import winterwell.jtwitter.Twitter;
-import winterwell.jtwitter.TwitterException;
 
 public class UpdaterService extends Service {
 	

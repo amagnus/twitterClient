@@ -2,18 +2,12 @@ package com.amagnus.yamba1;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -56,33 +50,6 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
     	String status = editText.getText().toString();
     	new PostToTwitter().execute(status);
     	Log.d(TAG, "onClicked");
-    }
-    
-    // Called first time user clicks on the menu button 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu, menu);
-    	return true;
-    }
-    
-    // Called when an options item is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	switch (item.getItemId()) {
-    		case R.id.itemServiceStart:
-    		startService(new Intent(this, UpdaterService.class));
-    		break;
-    		
-    		case R.id.itemServiceStop:
-    		stopService(new Intent(this, UpdaterService.class));
-    		break;
-    		
-    		case R.id.itemPrefs:
-    		startActivity(new Intent(this, PrefsActivity.class));
-    		break;
-    	}
-    return true;
     }
     
     // Asynchronously posts to twitter

@@ -57,6 +57,10 @@ public class StatusData {
 		this.dbHelper.close();
 	}
 	
+	public void delete() {
+		this.dbHelper.delete();
+	}
+	
 	public void insertOrIgnore(ContentValues values) {
 		Log.d(TAG, "insertOrIgnore on " + values);
 		SQLiteDatabase db = this.dbHelper.getWritableDatabase();

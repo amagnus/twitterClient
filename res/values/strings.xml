@@ -18,5 +18,8 @@
     <string name="titleServiceStart">Start service</string>
     <string name="titleServiceStop">Stop service</string>
     <string name="titleTimeline">Timeline</string>
+    <string name="msgSetupPrefs">Please set up preferences</string>
+    <string name="msgAllDataPurged">All data has been purged</string>
+    <string name="titlePurge">Purge data</string>
 
 </resources>
