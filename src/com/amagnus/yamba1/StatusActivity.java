@@ -24,7 +24,6 @@ public class StatusActivity extends Activity implements OnClickListener, TextWat
 	Button updateButton;
 	Twitter twitter;
 	TextView textCount;
-	SharedPreferences prefs;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -56,9 +56,11 @@ public class StatusData {
 	public void close() {
 		this.dbHelper.close();
 	}
-	
+
+	// Delete database contents
+	// To be improved
 	public void delete() {
-		this.dbHelper.delete();
+		this.dbHelper.close();
 	}
 	
 	public void insertOrIgnore(ContentValues values) {

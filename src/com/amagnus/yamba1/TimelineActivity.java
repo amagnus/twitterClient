@@ -1,9 +1,7 @@
 package com.amagnus.yamba1;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.text.format.DateUtils;
@@ -13,31 +11,29 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TimelineActivity extends Activity {
+public class TimelineActivity extends BaseActivity {
 
 	DbHelper dbHelper;
-	SQLiteDatabase db;
 	Cursor cursor;
 	ListView listTimeline;
 	TimelineAdapter adapter;
+	static final String[] FROM = { DbHelper.C_CREATED_AT, DbHelper.C_USER, DbHelper.C_TEXT };
+	static final int[] TO = { R.id.textCreatedAt, R.id.textUser, R.id.textText };
+	private YambaApplication yamba;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline_basic);
 		
-		// Find your views
-		listTimeline = (ListView) findViewById(R.id.listTimeline);
-		
-		// Connect to database
-		dbHelper = new DbHelper(this); //
-		db = dbHelper.getReadableDatabase(); //
-		
 		// Check whether preferences have been set
-		if (yamba1.getPrefs().getString("username", null) == null) {
+		if (yamba.getPrefs().getString("username", null) == null) {
 			startActivity(new Intent(this, PrefsActivity.class));
 			Toast.makeText(this, R.string.msgSetupPrefs, Toast.LENGTH_LONG).show();
 		}
+		
+		// Find your views
+		listTimeline = (ListView) findViewById(R.id.listTimeline);
 	}
 	
 	@Override
@@ -45,21 +41,28 @@ public class TimelineActivity extends Activity {
 		super.onDestroy();
 		
 		// Close the database
-		db.close();
+		yamba.getStatusData().close();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		
-		// Get the data from the database
-		cursor = db.query(DbHelper.TABLE, null, null, null, null, null, DbHelper.C_CREATED_AT + " DESC");
+		// Setup List
+		this.setupList();
+	}
+	
+	// Responsible for fetching data and setting up the list and the adapter
+	private void setupList() {
+		
+		// Get the data
+		cursor = yamba.getStatusData().getStatusUpdates();
 		startManagingCursor(cursor);
 	
-		// Create the adapter
-		adapter = new TimelineAdapter(this, cursor);
-		listTimeline.setAdapter(adapter);
+		// Setup Adapter
+		adapter = (TimelineAdapter) new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);
 		adapter.setViewBinder(VIEW_BINDER);
+		listTimeline.setAdapter(adapter);
 	}
 	
 	// View binder constant to inject business logic that converts a timestamp to relative time

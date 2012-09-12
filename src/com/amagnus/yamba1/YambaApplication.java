@@ -104,4 +104,8 @@ public class YambaApplication extends Application implements OnSharedPreferenceC
 		this.serviceRunning = serviceRunning;
 	}
 	
+	public SharedPreferences getPrefs() {
+		return prefs;
+	}
+	
 }
